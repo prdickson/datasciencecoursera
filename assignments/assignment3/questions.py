@@ -43,7 +43,7 @@ def a(x):
 
 GDP['AVG'] = GDP[frames].apply(a, axis=1)
 result_df = GDP.drop(frames,axis=1)
-print(result_df)
+# print(result_df)
 
 
 
@@ -81,3 +81,24 @@ with pd.option_context('display.max_rows', None, 'display.max_columns', None, 'd
         v = Top15.sort_values(by="% Renewable", ascending=False).iloc[0][["% Renewable"]]
         return (v.name, v.item())
 
+
+    S = pd.Series(np.arange(5), index=['a', 'b', 'c', 'd', 'e'])
+
+    print(S[1:4])
+    print(S[S <= 3][S > 0])
+
+
+    df = pd.DataFrame([[5,6,20],[2,82,28],[71,31,92],[67,37,49]], columns=['a','b','c'], index=['v','x', 'y', 'z'])
+
+    f = lambda x: x.max() + x.min()
+    df_new = df.apply(f)
+
+    # print(df.pivot_table(['max', 'min']))
+
+    multicol1 = pd.MultiIndex.from_tuples([('weight', 'kg'),
+                                           ('weight', 'pounds')])
+    df = pd.DataFrame([[1, 2], [2, 4]],
+                                        index=['cat', 'dog'],
+                                        columns=multicol1)
+
+    print(df.unstack().unstack())
